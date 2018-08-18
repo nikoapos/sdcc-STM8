@@ -51,25 +51,25 @@
 #define SWITCH_PIN 5
 
 int main(void) {
-    
-    // Set the pin where the LED is connected as a push-pull output
-    GPIO_SET_AS_OUTPUT(LED_PORT, LED_PIN);
-    GPIO_SET_AS_PUSH_PULL(LED_PORT, LED_PIN);
-    
-    // Set the pin where the switch is connected as input
-    GPIO_SET_AS_INPUT(SWITCH_PORT, SWITCH_PIN);
 
-    // Start an infinite loop
-    while(1) {
-        
-        // Check the state of the switch
-        if (GPIO_READ_INPUT(SWITCH_PORT, SWITCH_PIN)) {
-            // If it is high we turn on the LED
-            GPIO_WRITE_HIGH(LED_PORT, LED_PIN);
-        } else {
-            // If it is low we turn off the LED
-            GPIO_WRITE_LOW(LED_PORT, LED_PIN);
-        }
-        
+  // Set the pin where the LED is connected as a push-pull output
+  GPIO_SET_AS_OUTPUT(LED_PORT, LED_PIN);
+  GPIO_SET_AS_PUSH_PULL(LED_PORT, LED_PIN);
+
+  // Set the pin where the switch is connected as input
+  GPIO_SET_AS_INPUT(SWITCH_PORT, SWITCH_PIN);
+
+  // Start an infinite loop
+  while (1) {
+
+    // Check the state of the switch
+    if (GPIO_READ_INPUT(SWITCH_PORT, SWITCH_PIN)) {
+      // If it is high we turn on the LED
+      GPIO_WRITE_HIGH(LED_PORT, LED_PIN);
+    } else {
+      // If it is low we turn off the LED
+      GPIO_WRITE_LOW(LED_PORT, LED_PIN);
     }
+
+  }
 }
