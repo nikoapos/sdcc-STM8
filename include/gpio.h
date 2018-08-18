@@ -90,10 +90,12 @@
 // Resets a given GPIO port to its default configuration
 // Parameters:
 //    port = The port name as an uppercase letter
-# define GPIO_RESET_PORT(port) REGISTER_P##port##_ODR = GPIO_ODR_DEFAULT;\
-                               REGISTER_P##port##_DDR = GPIO_DDR_DEFAULT;\
-                               REGISTER_P##port##_CR1 = GPIO_CR1_DEFAULT;\
-                               REGISTER_P##port##_CR2 = GPIO_CR2_DEFAULT
+# define GPIO_RESET_PORT(port) do {\
+  REGISTER_P##port##_ODR = GPIO_ODR_DEFAULT;\
+  REGISTER_P##port##_DDR = GPIO_DDR_DEFAULT;\
+  REGISTER_P##port##_CR1 = GPIO_CR1_DEFAULT;\
+  REGISTER_P##port##_CR2 = GPIO_CR2_DEFAULT;\
+} while(0)
 
 // Sets a given GPIO pin as an input by setting the corresponding DDR bit to 0.
 // Parameters:
@@ -149,7 +151,7 @@
 //    pin - The pin of the port to read the input, a number in range [0,7]
 // Returns:
 //    true if the pin is set, false otherwise
-#define GPIO_READ_INPUT(port,pin) REGISTER_P##port##_IDR & GPIO_PIN_##pin
+#define GPIO_READ_INPUT(port, pin) REGISTER_P##port##_IDR & (uint8_t)GPIO_PIN_##pin
 
 // Read the GPIO output pin from the ODR register
 // Parameters:
@@ -157,7 +159,7 @@
 //    pin - The pin of the port to read the output, a number in range [0,7]
 // Returns:
 //    true if the pin is set, false otherwise
-#define GPIO_READ_OUTPUT(port,pin) REGISTER_P##port##_ODR & GPIO_PIN_##pin
+#define GPIO_READ_OUTPUT(port, pin) REGISTER_P##port##_ODR & GPIO_PIN_##pin
 
 #endif /* STM8S_GPIO_H */
 
