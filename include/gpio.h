@@ -148,7 +148,7 @@
 #define GPIO_WRITE_HIGH(port, pin) _GPIO_WRITE_HIGH(port, pin)
 
 // Set an output GPIO pin as low.
-// :
+// Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as low, a number in range [0,7]
 #define _GPIO_WRITE_LOW(port, pin) REGISTER_UNSET(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
@@ -167,7 +167,7 @@
 //    pin - The pin of the port to read the input, a number in range [0,7]
 // Returns:
 //    true if the pin is set, false otherwise
-#define _GPIO_READ_INPUT(port, pin) REGISTER_P##port##_IDR & (uint8_t)GPIO_PIN_##pin
+#define _GPIO_READ_INPUT(port, pin) (REGISTER_P##port##_IDR & (uint8_t)GPIO_PIN_##pin)
 #define GPIO_READ_INPUT(port, pin) _GPIO_READ_INPUT(port, pin)
 
 // Read the GPIO output pin from the ODR register
@@ -176,7 +176,7 @@
 //    pin - The pin of the port to read the output, a number in range [0,7]
 // Returns:
 //    true if the pin is set, false otherwise
-#define _GPIO_READ_OUTPUT(port, pin) REGISTER_P##port##_ODR & GPIO_PIN_##pin
+#define _GPIO_READ_OUTPUT(port, pin) (REGISTER_P##port##_ODR & GPIO_PIN_##pin)
 #define GPIO_READ_OUTPUT(port, pin) _GPIO_READ_OUTPUT(port, pin)
 
 // Set all GPIO as input with pull-up an no interrupt. This is the setup for all
@@ -196,6 +196,20 @@
   GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(F);\
 } while(0)
 #define GPIO_SET_ALL_PORTS_INPUT_PULL_UP_NO_INT() _GPIO_SET_ALL_PORTS_INPUT_PULL_UP_NO_INT()
+
+// Enable the interrupts for a GPIO pin.
+// Parameters:
+//    port - The port name as an uppercase letter
+//    pin - The pin of the port to enable the interrupts for
+#define _GPIO_ENABLE_INTERRUPT(port, pin) REGISTER_SET(REGISTER_P##port##_CR2, GPIO_PIN_##pin)
+#define GPIO_ENABLE_INTERRUPT(port, pin) _GPIO_ENABLE_INTERRUPT(port, pin)
+
+// Disable the interrupts for a GPIO pin.
+// Parameters:
+//    port - The port name as an uppercase letter
+//    pin - The pin of the port to disable the interrupts for
+#define _GPIO_DISABLE_INTERRUPT(port, pin) REGISTER_UNSET(REGISTER_P##port##_CR2, GPIO_PIN_##pin)
+#define GPIO_DISABLE_INTERRUPT(port, pin) _GPIO_DISABLE_INTERRUPT(port, pin)
 
 #endif /* STM8S_GPIO_H */
 
