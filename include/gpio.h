@@ -22,8 +22,8 @@
  * Created on August 17, 2018, 5:00 PM
  */
 
-#ifndef STM8S_GPIO_H
-#define STM8S_GPIO_H
+#ifndef STM8_GPIO_H
+#define STM8_GPIO_H
 
 #include <stm8.h>
 #include <utils.h>
@@ -211,5 +211,5 @@
 #define _GPIO_DISABLE_INTERRUPT(port, pin) REGISTER_UNSET(REGISTER_P##port##_CR2, GPIO_PIN_##pin)
 #define GPIO_DISABLE_INTERRUPT(port, pin) _GPIO_DISABLE_INTERRUPT(port, pin)
 
-#endif /* STM8S_GPIO_H */
+#endif /* STM8_GPIO_H */
 

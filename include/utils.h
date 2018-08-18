@@ -22,8 +22,8 @@
  * Created on August 17, 2018, 8:53 PM
  */
 
-#ifndef STM8S_UTILS_H
-#define STM8S_UTILS_H
+#ifndef STM8_UTILS_H
+#define STM8_UTILS_H
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -39,5 +39,5 @@
 #define REGISTER_UNSET(reg, bits) reg &= !bits
 #define REGISTER_INVERT(reg, bits) reg ^= bits
 
-#endif /* STM8S_UTILS_H */
+#endif /* STM8_UTILS_H */
 
