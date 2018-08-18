@@ -25,7 +25,7 @@
 #ifndef STM8S_GPIO_H
 #define STM8S_GPIO_H
 
-#include <stm8s.h>
+#include <stm8.h>
 #include <utils.h>
 
 ///////////////////////////////////////////////////////////////////////////////

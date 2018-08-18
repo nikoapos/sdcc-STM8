@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include <stm8s.h>
+#include <stm8.h>
 #include <gpio.h>
 
 int main(void)
