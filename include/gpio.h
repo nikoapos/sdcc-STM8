@@ -161,5 +161,21 @@
 //    true if the pin is set, false otherwise
 #define GPIO_READ_OUTPUT(port, pin) REGISTER_P##port##_ODR & GPIO_PIN_##pin
 
+// Set all GPIO as input with pull-up an no interrupt. This is the setup for all
+// unused GPIOs to avoid extra current consumption.
+#define GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(port) do {\
+  REGISTER_P##port##_DDR = 0x00;\
+  REGISTER_P##port##_CR1 = 0xFF;\
+  REGISTER_P##port##_CR2 = 0x00;\
+} while(0)
+#define GPIO_SET_ALL_PORTS_INPUT_PULL_UP_NO_INT() do {\
+  GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(A);\
+  GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(B);\
+  GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(C);\
+  GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(D);\
+  GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(E);\
+  GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(F);\
+} while(0)
+
 #endif /* STM8S_GPIO_H */
 

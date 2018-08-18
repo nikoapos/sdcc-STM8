@@ -4,6 +4,7 @@
 
 int main(void)
 {
+    GPIO_SET_ALL_PORTS_INPUT_PULL_UP_NO_INT();
     GPIO_SET_AS_OUTPUT(D, 4);
     GPIO_SET_AS_PUSH_PULL(D, 4);
     
