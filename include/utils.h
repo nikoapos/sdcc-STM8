@@ -37,6 +37,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 #define REGISTER_SET(reg, bits) reg |= bits
 #define REGISTER_UNSET(reg, bits) reg &= !bits
+#define REGISTER_INVERT(reg, bits) reg ^= bits
 
 #endif /* STM8S_UTILS_H */
 

@@ -148,11 +148,18 @@
 #define GPIO_WRITE_HIGH(port, pin) _GPIO_WRITE_HIGH(port, pin)
 
 // Set an output GPIO pin as low.
-// Parameters:
+// :
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as low, a number in range [0,7]
 #define _GPIO_WRITE_LOW(port, pin) REGISTER_UNSET(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
 #define GPIO_WRITE_LOW(port, pin) _GPIO_WRITE_LOW(port, pin)
+
+// Invert an output GPIO pin.
+// Parameters:
+//    port - The port name as an uppercase letter
+//    pin - The pin of the port to invert, a number in range [0,7]
+#define _GPIO_INVERT(port, pin) REGISTER_INVERT(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
+#define GPIO_INVERT(port, pin) _GPIO_INVERT(port, pin)
 
 // Read the GPIO input pin from the IDR register
 // Parameters:

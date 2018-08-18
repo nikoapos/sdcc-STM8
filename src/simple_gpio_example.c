@@ -70,5 +70,6 @@ int main(void) {
             // If it is low we turn off the LED
             GPIO_WRITE_LOW(LED_PORT, LED_PIN);
         }
+        
     }
 }
