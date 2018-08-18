@@ -152,7 +152,7 @@
 #define ITC_EXT_FALL_LOW 0b00 // Falling edge and low level
 #define ITC_EXT_RISE 0b01 // Rising edge only
 #define ITC_EXT_FALL 0b10 // Falling edge only
-#define ITC_EXT_RISE_FALL 0b11 // Rising and faling edge
+#define ITC_EXT_RISE_FALL 0b11 // Rising and falling edge
 
 ///////////////////////////////////////////////////////////////////////////////
 // The EXTI_CR register each port sensitivity is programmed in
