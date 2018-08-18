@@ -90,60 +90,69 @@
 // Resets a given GPIO port to its default configuration
 // Parameters:
 //    port = The port name as an uppercase letter
-# define GPIO_RESET_PORT(port) do {\
+# define _GPIO_RESET_PORT(port) do {\
   REGISTER_P##port##_ODR = GPIO_ODR_DEFAULT;\
   REGISTER_P##port##_DDR = GPIO_DDR_DEFAULT;\
   REGISTER_P##port##_CR1 = GPIO_CR1_DEFAULT;\
   REGISTER_P##port##_CR2 = GPIO_CR2_DEFAULT;\
 } while(0)
+#define GPIO_RESET_PORT(port) _GPIO_RESET_PORT(port)
 
 // Sets a given GPIO pin as an input by setting the corresponding DDR bit to 0.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as input, a number in range [0,7]
-#define GPIO_SET_AS_INPUT(port, pin) REGISTER_UNSET(REGISTER_P##port##_DDR, GPIO_PIN_##pin)
+#define _GPIO_SET_AS_INPUT(port, pin) REGISTER_UNSET(REGISTER_P##port##_DDR, GPIO_PIN_##pin)
+#define GPIO_SET_AS_INPUT(port, pin) _GPIO_SET_AS_INPUT(port, pin)
 
 // Sets a given GPIO pin as an output by setting the corresponding DDR bit to 1.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as output, a number in range [0,7]
-#define GPIO_SET_AS_OUTPUT(port, pin) REGISTER_SET(REGISTER_P##port##_DDR, GPIO_PIN_##pin)
+#define _GPIO_SET_AS_OUTPUT(port, pin) REGISTER_SET(REGISTER_P##port##_DDR, GPIO_PIN_##pin)
+#define GPIO_SET_AS_OUTPUT(port, pin) _GPIO_SET_AS_OUTPUT(port, pin)
 
 // Sets an input GPIO pin as floating by setting the corresponding CR1 bit to 0.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as floating, a number in range [0,7]
-#define GPIO_SET_AS_FLOATING(port, pin) REGISTER_UNSET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
+#define _GPIO_SET_AS_FLOATING(port, pin) REGISTER_UNSET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
+#define GPIO_SET_AS_FLOATING(port, pin) _GPIO_SET_AS_FLOATING(port, pin)
 
 // Sets an input GPIO pin as pull-up by setting the corresponding CR1 bit to 1.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as pull-up, a number in range [0,7]
-#define GPIO_SET_AS_PULL_UP(port, pin) REGISTER_SET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
+#define _GPIO_SET_AS_PULL_UP(port, pin) REGISTER_SET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
+#define GPIO_SET_AS_PULL_UP(port, pin) _GPIO_SET_AS_PULL_UP(port, pin)
 
 // Sets an output GPIO pin as open drain by setting the corresponding CR1 bit to 0.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as open drain, a number in range [0,7]
-#define GPIO_SET_AS_OPEN_DRAIN(port, pin) REGISTER_UNSET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
+#define _GPIO_SET_AS_OPEN_DRAIN(port, pin) REGISTER_UNSET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
+#define GPIO_SET_AS_OPEN_DRAIN(port, pin) _GPIO_SET_AS_OPEN_DRAIN(port, pin)
 
 // Sets an output GPIO pin as push-pull by setting the corresponding CR1 bit to 1.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as push-pull, a number in range [0,7]
-#define GPIO_SET_AS_PUSH_PULL(port, pin) REGISTER_SET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
+#define _GPIO_SET_AS_PUSH_PULL(port, pin) REGISTER_SET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
+#define GPIO_SET_AS_PUSH_PULL(port, pin) _GPIO_SET_AS_PUSH_PULL(port, pin)
 
 // Set an output GPIO pin as high.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as high, a number in range [0,7]
-#define GPIO_WRITE_HIGH(port, pin) REGISTER_SET(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
+#define _GPIO_WRITE_HIGH(port, pin) REGISTER_SET(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
+#define GPIO_WRITE_HIGH(port, pin) _GPIO_WRITE_HIGH(port, pin)
 
 // Set an output GPIO pin as low.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as low, a number in range [0,7]
-#define GPIO_WRITE_LOW(port, pin) REGISTER_UNSET(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
+#define _GPIO_WRITE_LOW(port, pin) REGISTER_UNSET(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
+#define GPIO_WRITE_LOW(port, pin) _GPIO_WRITE_LOW(port, pin)
 
 // Read the GPIO input pin from the IDR register
 // Parameters:
@@ -151,7 +160,8 @@
 //    pin - The pin of the port to read the input, a number in range [0,7]
 // Returns:
 //    true if the pin is set, false otherwise
-#define GPIO_READ_INPUT(port, pin) REGISTER_P##port##_IDR & (uint8_t)GPIO_PIN_##pin
+#define _GPIO_READ_INPUT(port, pin) REGISTER_P##port##_IDR & (uint8_t)GPIO_PIN_##pin
+#define GPIO_READ_INPUT(port, pin) _GPIO_READ_INPUT(port, pin)
 
 // Read the GPIO output pin from the ODR register
 // Parameters:
@@ -159,16 +169,18 @@
 //    pin - The pin of the port to read the output, a number in range [0,7]
 // Returns:
 //    true if the pin is set, false otherwise
-#define GPIO_READ_OUTPUT(port, pin) REGISTER_P##port##_ODR & GPIO_PIN_##pin
+#define _GPIO_READ_OUTPUT(port, pin) REGISTER_P##port##_ODR & GPIO_PIN_##pin
+#define GPIO_READ_OUTPUT(port, pin) _GPIO_READ_OUTPUT(port, pin)
 
 // Set all GPIO as input with pull-up an no interrupt. This is the setup for all
 // unused GPIOs to avoid extra current consumption.
-#define GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(port) do {\
+#define _GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(port) do {\
   REGISTER_P##port##_DDR = 0x00;\
   REGISTER_P##port##_CR1 = 0xFF;\
   REGISTER_P##port##_CR2 = 0x00;\
 } while(0)
-#define GPIO_SET_ALL_PORTS_INPUT_PULL_UP_NO_INT() do {\
+#define GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(port) _GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(port)
+#define _GPIO_SET_ALL_PORTS_INPUT_PULL_UP_NO_INT() do {\
   GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(A);\
   GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(B);\
   GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(C);\
@@ -176,6 +188,7 @@
   GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(E);\
   GPIO_SET_PORT_INPUT_PULL_UP_NO_INT(F);\
 } while(0)
+#define GPIO_SET_ALL_PORTS_INPUT_PULL_UP_NO_INT() _GPIO_SET_ALL_PORTS_INPUT_PULL_UP_NO_INT()
 
 #endif /* STM8S_GPIO_H */
 
