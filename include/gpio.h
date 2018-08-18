@@ -63,6 +63,16 @@
 #define REGISTER_PD_DDR REGISTER 0x5011
 #define REGISTER_PD_CR1 REGISTER 0x5012
 #define REGISTER_PD_CR2 REGISTER 0x5013
+#define REGISTER_PE_ODR REGISTER 0x5014
+#define REGISTER_PE_IDR REGISTER_RO 0x5015
+#define REGISTER_PE_DDR REGISTER 0x5016
+#define REGISTER_PE_CR1 REGISTER 0x5017
+#define REGISTER_PE_CR2 REGISTER 0x5018
+#define REGISTER_PF_ODR REGISTER 0x5019
+#define REGISTER_PF_IDR REGISTER_RO 0x501A
+#define REGISTER_PF_DDR REGISTER 0x501B
+#define REGISTER_PF_CR1 REGISTER 0x501C
+#define REGISTER_PF_CR2 REGISTER 0x501D
 
 ///////////////////////////////////////////////////////////////////////////////
 // Default register values
@@ -79,7 +89,7 @@
 
 // Resets a given GPIO port to its default configuration
 // Parameters:
-//    port = The port name, one of A, B, C or D
+//    port = The port name as an uppercase letter
 # define GPIO_RESET_PORT(port) REGISTER_P##port##_ODR = GPIO_ODR_DEFAULT;\
                                REGISTER_P##port##_DDR = GPIO_DDR_DEFAULT;\
                                REGISTER_P##port##_CR1 = GPIO_CR1_DEFAULT;\
@@ -87,55 +97,55 @@
 
 // Sets a given GPIO pin as an input by setting the corresponding DDR bit to 0.
 // Parameters:
-//    port - The port name, one of A, B, C or D
+//    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as input, a number in range [0,7]
 #define GPIO_SET_AS_INPUT(port, pin) REGISTER_UNSET(REGISTER_P##port##_DDR, GPIO_PIN_##pin)
 
 // Sets a given GPIO pin as an output by setting the corresponding DDR bit to 1.
 // Parameters:
-//    port - The port name, one of A, B, C or D
+//    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as output, a number in range [0,7]
 #define GPIO_SET_AS_OUTPUT(port, pin) REGISTER_SET(REGISTER_P##port##_DDR, GPIO_PIN_##pin)
 
 // Sets an input GPIO pin as floating by setting the corresponding CR1 bit to 0.
 // Parameters:
-//    port - The port name, one of A, B, C or D
+//    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as floating, a number in range [0,7]
 #define GPIO_SET_AS_FLOATING(port, pin) REGISTER_UNSET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
 
 // Sets an input GPIO pin as pull-up by setting the corresponding CR1 bit to 1.
 // Parameters:
-//    port - The port name, one of A, B, C or D
+//    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as pull-up, a number in range [0,7]
 #define GPIO_SET_AS_PULL_UP(port, pin) REGISTER_SET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
 
 // Sets an output GPIO pin as open drain by setting the corresponding CR1 bit to 0.
 // Parameters:
-//    port - The port name, one of A, B, C or D
+//    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as open drain, a number in range [0,7]
 #define GPIO_SET_AS_OPEN_DRAIN(port, pin) REGISTER_UNSET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
 
 // Sets an output GPIO pin as push-pull by setting the corresponding CR1 bit to 1.
 // Parameters:
-//    port - The port name, one of A, B, C or D
+//    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as push-pull, a number in range [0,7]
 #define GPIO_SET_AS_PUSH_PULL(port, pin) REGISTER_SET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
 
 // Set an output GPIO pin as high.
 // Parameters:
-//    port - The port name, one of A, B, C or D
+//    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as high, a number in range [0,7]
 #define GPIO_WRITE_HIGH(port, pin) REGISTER_SET(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
 
 // Set an output GPIO pin as low.
 // Parameters:
-//    port - The port name, one of A, B, C or D
+//    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as low, a number in range [0,7]
 #define GPIO_WRITE_LOW(port, pin) REGISTER_UNSET(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
 
 // Read the GPIO input pin from the IDR register
 // Parameters:
-//    port - The port name, one of A, B, C or D
+//    port - The port name as an uppercase letter
 //    pin - The pin of the port to read the input, a number in range [0,7]
 // Returns:
 //    true if the pin is set, false otherwise
@@ -143,7 +153,7 @@
 
 // Read the GPIO output pin from the ODR register
 // Parameters:
-//    port - The port name, one of A, B, C or D
+//    port - The port name as an uppercase letter
 //    pin - The pin of the port to read the output, a number in range [0,7]
 // Returns:
 //    true if the pin is set, false otherwise

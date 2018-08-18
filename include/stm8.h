@@ -22,10 +22,20 @@
  * Created on August 17, 2018, 4:11 PM
  */
 
-#ifndef STM8S_H
-#define STM8S_H
+#ifndef STM8_H
+#define STM8_H
 
 #include <stdint.h>
+
+
+#define TEST
+///////////////////////////////////////////////////////////////////////////////
+// Check that we have a supported model
+///////////////////////////////////////////////////////////////////////////////
+#if !defined(STM8S103)
+#error "Please select a supported chip model in the Makefile"
+#endif
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -34,5 +44,5 @@
 #define nop() {__asm__("nop\n");}  /* No Operation */
 
 
-#endif /* STM8S_H */
+#endif /* STM8_H */
 
