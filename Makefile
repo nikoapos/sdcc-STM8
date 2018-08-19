@@ -1,6 +1,10 @@
-# The STM8 model. Can be one of:
-#   - STM8S103 : For STM8S103F2, STM8103F3 and STM8S103K3 chips
-STM8_MODEL = STM8S103
+# The STM8 model. Can be one of: 
+# - STM8S103F2
+# - STM8S103F3
+# Other models which have the same register addresses and pin configuration as
+# the above (at least for the used functionality) will also work, but have not
+# been tested.
+STM8_MODEL = STM8S103F2
 
 CC = sdcc-sdcc
 CFLAGS = --Werror --std-sdcc11 -mstm8 -D$(STM8_MODEL) -Iinclude
