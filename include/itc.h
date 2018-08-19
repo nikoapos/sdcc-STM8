@@ -182,8 +182,6 @@
 #define wfi() {__asm__("wfi\n");} // Wait for interrupt
 #define waitForInterrupt() wfi() // Alias for wait for interrupt
 
-#endif /* STM8_ITC_H */
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // Macros for setting up the interrupts by the user
@@ -214,3 +212,6 @@
   _ITC_PORT_##port##_CR |= (uint8_t)(sensitivity << _ITC_PORT_##port##_CR_SHIFT);\
 } while(0)
 #define ITC_SET_PORT_SENSITIVITY(port, sensitivity) _ITC_SET_PORT_SENSITIVITY(port, sensitivity)
+
+
+#endif /* STM8_ITC_H */
