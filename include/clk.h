@@ -26,6 +26,8 @@
 #define STM8_CLK_H
 
 #include <stm8.h>
+#include <gpio.h>
+#include <utils.h>
 
 ///////////////////////////////////////////////////////////////////////////////
 // Clock related registers
@@ -65,6 +67,36 @@
 #define _CLK_CPU_DIV_64 (uint8_t)0b00000110
 #define _CLK_CPU_DIV_128 (uint8_t)0b00000111
 
+///////////////////////////////////////////////////////////////////////////////
+// Helper values for setting the CCO clock selection
+///////////////////////////////////////////////////////////////////////////////
+#define _CLK_CCO_SEL_MASK (uint8_t)0b00011110
+#define _CLK_CCO_SEL_HSIDIV (uint8_t)0b00000000
+#define _CLK_CCO_SEL_LSI (uint8_t)0b00000010
+#define _CLK_CCO_SEL_HSE (uint8_t)0b00000100
+#define _CLK_CCO_SEL_CPU (uint8_t)0b00001000
+#define _CLK_CCO_SEL_CPU_2 (uint8_t)0b00001010
+#define _CLK_CCO_SEL_CPU_4 (uint8_t)0b00001100
+#define _CLK_CCO_SEL_CPU_8 (uint8_t)0b00001110
+#define _CLK_CCO_SEL_CPU_16 (uint8_t)0b00010000
+#define _CLK_CCO_SEL_CPU_32 (uint8_t)0b00010010
+#define _CLK_CCO_SEL_CPU_64 (uint8_t)0b00010100
+#define _CLK_CCO_SEL_HSI (uint8_t)0b00010110
+#define _CLK_CCO_SEL_MASTER (uint8_t)0b00011000
+
+///////////////////////////////////////////////////////////////////////////////
+// The GPIO pin of the CCO
+///////////////////////////////////////////////////////////////////////////////
+#define _CLK_CCO_PORT C
+#define _CLK_CCO_PIN 4
+
+///////////////////////////////////////////////////////////////////////////////
+// Useful register bits
+///////////////////////////////////////////////////////////////////////////////
+#define _CLK_CCOR_CCOBSY (uint8_t)0b01000000
+#define _CLK_CCOR_CCORDY (uint8_t)0b00100000
+#define _CLK_CCOR_CCOEN (uint8_t)0b00000001
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Macros for setting up the clock, to be used by the user
@@ -87,6 +119,25 @@
   REGISTER_CLK_CKDIVR |= _CLK_CPU_DIV_##divider;\
 } while(0)
 #define CLK_SET_CPU_DIVIDER(divider) _CLK_SET_CPU_DIVIDER(divider)
+
+// Select the source for the output clock
+// Parameters:
+// - source: One of HSIDIV, SI, HSE, CPU, CPU_2, CPU_4, CPU_8, CPU_16, CPU_32
+//           CPU_64, HSI, MASTER
+#define _CLK_SET_CCO_SOURCE(source) do {\
+  REGISTER_CLK_CCOR &= ~_CLK_CCO_SEL_MASK;\
+  REGISTER_CLK_CCOR |= _CLK_CCO_SEL_##source;\
+} while(0)
+#define CLK_SET_CCO_SOURCE(source) _CLK_SET_CCO_SOURCE(source)
+
+#define CLK_ENABLE_CCO() do {\
+  GPIO_SET_AS_OUTPUT(_CLK_CCO_PORT, _CLK_CCO_PIN);\
+  GPIO_SET_AS_PUSH_PULL(_CLK_CCO_PORT, _CLK_CCO_PIN);\
+  REGISTER_SET(REGISTER_CLK_CCOR, _CLK_CCOR_CCOEN);\
+} while(0)
+
+// Disable the clock output
+#define CLK_DISABLE_CCO() REGISTER_UNSET(REGISTER_CLK_CCOR, _CLK_CCOR_CCOEN)
 
 #endif /* STM8_CLK_H */
 

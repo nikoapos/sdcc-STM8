@@ -35,9 +35,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Macros for setting and un-setting bits of a register
 ///////////////////////////////////////////////////////////////////////////////
-#define REGISTER_SET(reg, bits) reg |= bits
-#define REGISTER_UNSET(reg, bits) reg &= !bits
-#define REGISTER_INVERT(reg, bits) reg ^= bits
+#define _REGISTER_SET(reg, bits) reg |= bits
+#define REGISTER_SET(reg, bits) _REGISTER_SET(reg, bits)
+#define _REGISTER_UNSET(reg, bits) reg &= !bits
+#define REGISTER_UNSET(reg, bits) _REGISTER_UNSET(reg, bits)
+#define _REGISTER_INVERT(reg, bits) reg ^= bits
+#define REGISTER_INVERT(reg, bits) _REGISTER_INVERT(reg, bits)
 
 #endif /* STM8_UTILS_H */
 
