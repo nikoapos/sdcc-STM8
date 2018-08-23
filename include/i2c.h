@@ -25,6 +25,7 @@
 #ifndef STM8_I2C_H
 #define STM8_I2C_H
 
+#include <stdbool.h>
 #include <stm8.h>
 #include <utils.h>
 
@@ -91,7 +92,7 @@
 // Parameters:
 // - address: The own address (7bit)
 // - frequency: The frequency f_master which is fed to the peripheral (in MHz)
-inline void i2cInitialize(uint8_t address, uint8_t frequency) {
+void i2cInitialize(uint8_t address, uint8_t frequency) {
   uint16_t ccr;
   
   // Disable the I2C peripheral
@@ -127,6 +128,103 @@ inline void i2cInitialize(uint8_t address, uint8_t frequency) {
   REGISTER_SET(REGISTER_I2C_CR2, I2C_CR2_ACK);
 }
 
+
+//
+// This macro implements the I2C interrupt handler in such a way so that it can
+// read and write locations at the memory in slave mode. It can handle multiple
+// memory locations, which are identified by an unsigned 8bit integer key.
+//
+// The I2C communication is as follows:
+// - The master sends a byte containing the ID of the memory location
+// - If it keeps sending bytes, they are written in the memory in sequential
+//   locations
+// - If it starts reading bytes, the values are returned sequentially
+//
+// This behavior simulates the behavior of I2C controllers which provide access
+// to the registers of different peripherals.
+//
+// The implementation controls the locations of the memory to be exposed by
+// passing as argument the name of a function with the following signature:
+// - First parameter (uint8_t id):
+//      The ID of the memory location, as read from the I2C bus
+// - Second parameter (uint8_t* size):
+//      The implementation must write the number of bytes in the memory which
+//      is to be accessed
+// - Return type (uint8_t*):
+//      A pointer to the first byte in memory for the given ID
+//
+// Note that if the master keeps sending write bytes after the declared size
+// the are ignored. Similarly, if it keeps reading bytes, zeroes are returned.
+//
+// For an example of how to use this macro see the src/i2c_adder_example.c
+//
+void _i2cMemorySlave( uint8_t* (*handleId)(uint8_t, uint8_t*), uint8_t** ptr,
+                     uint8_t* size, bool* read_id) {
+  
+  // Event EV1
+  if (REGISTER_I2C_SR1 & I2C_SR1_ADDR) {
+    REGISTER_I2C_SR3; // Read the SR3 to unblock the I2C
+    *read_id = true; // We just got the address so we set that we want to read the ID
+    return;
+  }
+  
+  // Event EV2
+  if (REGISTER_I2C_SR1 & I2C_SR1_RXNE) {
+    if (*read_id) {
+      // If we are reading the ID use the user method to get the pointer and the size
+      *ptr = (*handleId)(REGISTER_I2C_DR, size);
+      // If we have an unknown ID we do not want to read or write any bytes,
+      // so we set the size to zero
+      if (*ptr == 0) {
+        *size = 0;
+      }
+      *read_id = false; // All rest bytes should be written in memory
+    } else {
+      // Write in memory the byte from I2C, if the size is not 0, otherwise ignore it
+      if (*size > 0) {
+        **ptr = REGISTER_I2C_DR;
+        ++(*ptr);
+        --(*size);
+      }
+    }
+    return;
+  }
+  
+  // Even EV3
+  if (REGISTER_I2C_SR1 & I2C_SR1_TXE) {
+    // Write in I2C the byte from memory if size is not 0, otherwise write 0
+    if (*size > 0) {
+      REGISTER_I2C_DR = **ptr;
+        ++(*ptr);
+        --(*size);
+    } else {
+      REGISTER_I2C_DR = 0;
+    }
+    return;
+  }
+  
+  // Event EV3-2
+  if (REGISTER_I2C_SR2 & I2C_SR2_AF) {
+    REGISTER_UNSET(REGISTER_I2C_SR2, I2C_SR2_AF);
+    return;
+  }
+  
+  // Event EV4
+  if (REGISTER_I2C_SR1 & I2C_SR1_STOPF) {
+    REGISTER_SET(REGISTER_I2C_CR2, I2C_CR2_ACK);
+    return;
+  }
+  
+}
+
+#define i2cMemorySlaveIterruptHandler(handleId) \
+uint8_t* _i2c_memory_slave_ptr = 0;\
+uint8_t _i2c_memory_slave_size = 0;\
+bool _i2c_memory_slave_read_id = false;\
+void _i2cMemorySlaveInterruptHandler() __interrupt(ITC_IRQ_I2C) {\
+  _i2cMemorySlave(handleId, &_i2c_memory_slave_ptr,\
+                  &_i2c_memory_slave_size, &_i2c_memory_slave_read_id);\
+}
 
 #endif /* STM8_I2C_H */
 
