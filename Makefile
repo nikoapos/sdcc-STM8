@@ -11,18 +11,31 @@ CFLAGS = --Werror --std-sdcc11 -mstm8 -D$(STM8_MODEL) -Iinclude
 LDFLAGS = -lstm8 -mstm8 --out-fmt-ihx
 
 HEADERS = $(wildcard *.h include/*.h)
-IHX_FILES = $(patsubst src/%.c, build/%.ihx, $(wildcard src/*.c))
+EXAMPLE_IHX_FILES = $(patsubst src/examples/%.c, build/examples/%.ihx, $(wildcard src/examples/*.c))
+PROGRAM_IHX_FILES = $(patsubst src/programs/%.c, build/programs/%.ihx, $(wildcard src/programs/*.c))
 
-all: build $(IHX_FILES)
+all: examples programs ;
 
-build/%.rel: src/%.c $(HEADERS)
+examples: build $(EXAMPLE_IHX_FILES) ;
+
+programs: build $(PROGRAM_IHX_FILES) ;
+
+build/examples/%.rel: src/examples/%.c $(HEADERS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(IHX_FILES): %.ihx: %.rel
+build/programs/%.rel: src/programs/%.c $(HEADERS)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(EXAMPLE_IHX_FILES): %.ihx: %.rel
+	$(CC) $(LDFLAGS) $< -o $@
+
+$(PROGRAM_IHX_FILES): %.ihx: %.rel
 	$(CC) $(LDFLAGS) $< -o $@
 
 build:
 	mkdir build
+	mkdir build/examples
+	mkdir build/programs
 
 clean:
-	rm build/*
+	rm -rf build
