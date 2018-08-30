@@ -25,6 +25,7 @@
 #ifndef STM8_GPIO_H
 #define STM8_GPIO_H
 
+#include <stdbool.h>
 #include <stm8.h>
 #include <utils.h>
 
@@ -167,7 +168,7 @@
 //    pin - The pin of the port to read the input, a number in range [0,7]
 // Returns:
 //    true if the pin is set, false otherwise
-#define _GPIO_READ_INPUT(port, pin) (REGISTER_P##port##_IDR & (uint8_t)GPIO_PIN_##pin)
+#define _GPIO_READ_INPUT(port, pin) (bool)(REGISTER_P##port##_IDR & (uint8_t)GPIO_PIN_##pin)
 #define GPIO_READ_INPUT(port, pin) _GPIO_READ_INPUT(port, pin)
 
 // Read the GPIO output pin from the ODR register
@@ -176,7 +177,7 @@
 //    pin - The pin of the port to read the output, a number in range [0,7]
 // Returns:
 //    true if the pin is set, false otherwise
-#define _GPIO_READ_OUTPUT(port, pin) (REGISTER_P##port##_ODR & GPIO_PIN_##pin)
+#define _GPIO_READ_OUTPUT(port, pin) (bool)(REGISTER_P##port##_ODR & GPIO_PIN_##pin)
 #define GPIO_READ_OUTPUT(port, pin) _GPIO_READ_OUTPUT(port, pin)
 
 // Set all GPIO as input with pull-up an no interrupt. This is the setup for all
