@@ -47,14 +47,11 @@
 #define I2C_ADDRESS 0x55
 
 // The pins where each photo-interrupter is connected
-#define PORT_IN_1 C
-#define PIN_IN_1 4
-#define PORT_IN_2 C
-#define PIN_IN_2 6
-#define PORT_IN_3 C
-#define PIN_IN_3 3
-#define PORT_IN_4 C
-#define PIN_IN_4 5
+#define PORT_IN C
+#define PIN_IN_1 3
+#define PIN_IN_2 4
+#define PIN_IN_3 5
+#define PIN_IN_4 6
 
 // The counters for the four inputs
 uint16_t count_1 = 0;
@@ -71,10 +68,10 @@ bool state_4 = false;
 // Updates the counters if the state of the input has changed
 void updateCounters() {
   // Read the new state of the inputs
-  bool new_state_1 = GPIO_READ_INPUT(PORT_IN_1, PIN_IN_1);
-  bool new_state_2 = GPIO_READ_INPUT(PORT_IN_2, PIN_IN_2);
-  bool new_state_3 = GPIO_READ_INPUT(PORT_IN_3, PIN_IN_3);
-  bool new_state_4 = GPIO_READ_INPUT(PORT_IN_4, PIN_IN_4);
+  bool new_state_1 = GPIO_READ_INPUT(PORT_IN, PIN_IN_1);
+  bool new_state_2 = GPIO_READ_INPUT(PORT_IN, PIN_IN_2);
+  bool new_state_3 = GPIO_READ_INPUT(PORT_IN, PIN_IN_3);
+  bool new_state_4 = GPIO_READ_INPUT(PORT_IN, PIN_IN_4);
 
   // Update the counters
   if (new_state_1 != state_1) {
@@ -101,16 +98,20 @@ int main() {
   // Set the f_master to 16 MHz
   CLK_SET_HSI_DIVIDER(1);
   
+  // Reset all pins to use the minimum power
+  GPIO_SET_ALL_PORTS_INPUT_PULL_UP_NO_INT();
+  
   // Set the input pins as inputs
-  GPIO_SET_AS_INPUT(PORT_IN_1, PIN_IN_1);
-  GPIO_SET_AS_INPUT(PORT_IN_2, PIN_IN_2);
-  GPIO_SET_AS_INPUT(PORT_IN_3, PIN_IN_3);
-  GPIO_SET_AS_INPUT(PORT_IN_4, PIN_IN_4);
+  GPIO_SET_AS_INPUT(PORT_IN, PIN_IN_1);
+  GPIO_SET_AS_INPUT(PORT_IN, PIN_IN_2);
+  GPIO_SET_AS_INPUT(PORT_IN, PIN_IN_3);
+  GPIO_SET_AS_INPUT(PORT_IN, PIN_IN_4);
   
   // Initialize the I2C peripheral
   i2cInitialize(I2C_ADDRESS, 16);
   
   // Enable the interrupts
+  ITC_SET_PRIORITY(ITC_IRQ_I2C, 3); // I2C must have the highest priority
   enableInterrupts();
   
   // Start an infinite loop which updates the counters constantly
