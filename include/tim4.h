@@ -72,29 +72,29 @@
 // Sets the TIM4 prescaler
 // Parameters:
 // - value: One of the TIM4_PRESCALER_***
-#define _TIM4_SET_PRESCALER(value) do {\
+#define _tim4SetPrescaler(value) do {\
   REGISTER_UNSET(REGISTER_TIM4_PSCR, _TIM4_PRESCALER_MASK);\
   REGISTER_SET(REGISTER_TIM4_PSCR, value);\
 } while(0)
-#define TIM4_SET_PRESCALER(value) _TIM4_SET_PRESCALER(value)
+#define tim4SetPrescaler(value) _tim4SetPrescaler(value)
 
 // Sets the TIM4 auto-reload value
 // Parameters:
 // - value: A uint8_t with the value where overflow will happen
-#define _TIM4_SET_PERIOD(value) REGISTER_TIM4_ARR = value
-#define TIM4_SET_PERIOD(value) _TIM4_SET_PERIOD(value)
+#define _tim4SetPeriod(value) REGISTER_TIM4_ARR = value
+#define tim4SetPeriod(value) _tim4SetPeriod(value)
 
 // Clears the update interrupt flag
-#define TIM4_CLEAR_UPDATE_INTERRUPT_FLAG() REGISTER_UNSET(REGISTER_TIM4_SR, TIM4_SR_UIF)
+#define tim4ClearUpdateInterruptFlag() REGISTER_UNSET(REGISTER_TIM4_SR, TIM4_SR_UIF)
 
 // Enables the update interrupt
-#define TIM4_ENABLE_INTERRUPT() do {\
-  TIM4_CLEAR_UPDATE_INTERRUPT_FLAG();\
+#define tim4EnableInterrupt() do {\
+  tim4ClearUpdateInterruptFlag();\
   REGISTER_SET(REGISTER_TIM4_IER, TIM4_IER_UIE);\
 } while(0)
 
 // Starts the TIM4 timer
-#define TIM4_START() REGISTER_SET(REGISTER_TIM4_CR1, TIM4_CR1_CEN)
+#define tim4Start() REGISTER_SET(REGISTER_TIM4_CR1, TIM4_CR1_CEN)
 
 #endif /* STM8_TIM4_H */
 

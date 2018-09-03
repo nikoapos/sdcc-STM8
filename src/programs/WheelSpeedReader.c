@@ -102,9 +102,9 @@ int main() {
   // Set the TIM4 timer to create an interrupt every 1ms
   // We run at 16 Mz and we set the prescaler to 128, so the frequency of the
   // TIM4 is 125 kHz
-  TIM4_SET_PRESCALER(TIM4_PRESCALER_128);
+  tim4SetPrescaler(TIM4_PRESCALER_128);
   // We want 1 ms period, so the timer should overflow when it reaches 124
-  TIM4_SET_PERIOD(124);
+  tim4SetPeriod(124);
   
   // Set the period of all the wheels to 100ms (the default)
   wheel_1.period = 100;
@@ -113,8 +113,8 @@ int main() {
   wheel_4.period = 100;
   
   // Enable the TIM4 interrupts and start it
-  TIM4_ENABLE_INTERRUPT();
-  TIM4_START();
+  tim4EnableInterrupt();
+  tim4Start();
   
   // Reset all pins to use the minimum power
   gpioSetAllPortsInputPullUpNoInt();
@@ -218,7 +218,7 @@ void measureSpeed(Wheel* wheel) {
 // Called every time the TIM4 overflows, aka every 1ms
 void measureSpeedEvent() __interrupt(ITC_IRQ_TIM4_UPD_OVF) {
   // First we clear the interrupt flag
-  TIM4_CLEAR_UPDATE_INTERRUPT_FLAG();
+  tim4ClearUpdateInterruptFlag();
   
   // Measure the speeds of all wheels
   measureSpeed(&wheel_1);
