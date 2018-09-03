@@ -30,30 +30,30 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Interrupt IRQ numbers
 ///////////////////////////////////////////////////////////////////////////////
-#define ITC_IRQ_TLI 0 // External top level interrupt
-#define ITC_IRQ_AWU 1 // Auto wake up from halt
-#define ITC_IRQ_CLK 2 // Clock controller
-#define ITC_IRQ_EXTI0 3 // Port A external interrupts
-#define ITC_IRQ_PORTA 3 // Port A external interrupts
-#define ITC_IRQ_EXTI1 4 // Port B external interrupts
-#define ITC_IRQ_PORTB 4 // Port B external interrupts
-#define ITC_IRQ_EXTI2 5 // Port C external interrupts
-#define ITC_IRQ_PORTC 5 // Port C external interrupts
-#define ITC_IRQ_EXTI3 6 // Port D external interrupts
-#define ITC_IRQ_PORTD 6 // Port D external interrupts
-#define ITC_IRQ_EXTI4 7 // Port E external interrupts
-#define ITC_IRQ_PORTE 7 // Port E external interrupts
-#define ITC_IRQ_SPI 10 // End of transfer
+#define ITC_IRQ_TLI          0 // External top level interrupt
+#define ITC_IRQ_AWU          1 // Auto wake up from halt
+#define ITC_IRQ_CLK          2 // Clock controller
+#define ITC_IRQ_EXTI0        3 // Port A external interrupts
+#define ITC_IRQ_PORTA        3 // Port A external interrupts
+#define ITC_IRQ_EXTI1        4 // Port B external interrupts
+#define ITC_IRQ_PORTB        4 // Port B external interrupts
+#define ITC_IRQ_EXTI2        5 // Port C external interrupts
+#define ITC_IRQ_PORTC        5 // Port C external interrupts
+#define ITC_IRQ_EXTI3        6 // Port D external interrupts
+#define ITC_IRQ_PORTD        6 // Port D external interrupts
+#define ITC_IRQ_EXTI4        7 // Port E external interrupts
+#define ITC_IRQ_PORTE        7 // Port E external interrupts
+#define ITC_IRQ_SPI          10 // End of transfer
 #define ITC_IRQ_TIM1_UPD_OVF 11 // TIM1 update/overflow/underflow/trigger/break
 #define ITC_IRQ_TIM1_CPT_CMP 12 // TIM1 capture/compare
 #define ITC_IRQ_TIM2_UPD_OVF 13 // TIM2 update/overflow
 #define ITC_IRQ_TIM2_CPT_CMP 14 // TIM2 capture/compare
-#define ITC_IRQ_UART1_TX 17 // Tx complete
-#define ITC_IRQ_UART1_RX 18 // Receive register DATA FULL
-#define ITC_IRQ_I2C 19 // I2C interrupt
-#define ITC_IRQ_ADC1 22 // ADC1 end of conversion/analog watchdog interrupt
+#define ITC_IRQ_UART1_TX     17 // Tx complete
+#define ITC_IRQ_UART1_RX     18 // Receive register DATA FULL
+#define ITC_IRQ_I2C          19 // I2C interrupt
+#define ITC_IRQ_ADC1         22 // ADC1 end of conversion/analog watchdog interrupt
 #define ITC_IRQ_TIM4_UPD_OVF 23 // TIM4 update/overflow
-#define ITC_IRQ_FLASH 24 // EOP/WR_PG_DIS
+#define ITC_IRQ_FLASH        24 // EOP/WR_PG_DIS
 
 ///////////////////////////////////////////////////////////////////////////////
 // Interrupt registers
@@ -74,16 +74,16 @@
 ///////////////////////////////////////////////////////////////////////////////
 // The SPR register each interrupt is configured in
 ///////////////////////////////////////////////////////////////////////////////
-#define _ITC_0_SPR REGISTER_ITC_SPR1
-#define _ITC_1_SPR REGISTER_ITC_SPR1
-#define _ITC_2_SPR REGISTER_ITC_SPR1
-#define _ITC_3_SPR REGISTER_ITC_SPR1
-#define _ITC_4_SPR REGISTER_ITC_SPR2
-#define _ITC_5_SPR REGISTER_ITC_SPR2
-#define _ITC_6_SPR REGISTER_ITC_SPR2
-#define _ITC_7_SPR REGISTER_ITC_SPR2
-#define _ITC_8_SPR REGISTER_ITC_SPR3
-#define _ITC_9_SPR REGISTER_ITC_SPR3
+#define _ITC_0_SPR  REGISTER_ITC_SPR1
+#define _ITC_1_SPR  REGISTER_ITC_SPR1
+#define _ITC_2_SPR  REGISTER_ITC_SPR1
+#define _ITC_3_SPR  REGISTER_ITC_SPR1
+#define _ITC_4_SPR  REGISTER_ITC_SPR2
+#define _ITC_5_SPR  REGISTER_ITC_SPR2
+#define _ITC_6_SPR  REGISTER_ITC_SPR2
+#define _ITC_7_SPR  REGISTER_ITC_SPR2
+#define _ITC_8_SPR  REGISTER_ITC_SPR3
+#define _ITC_9_SPR  REGISTER_ITC_SPR3
 #define _ITC_10_SPR REGISTER_ITC_SPR3
 #define _ITC_11_SPR REGISTER_ITC_SPR3
 #define _ITC_12_SPR REGISTER_ITC_SPR4
@@ -108,16 +108,16 @@
 ///////////////////////////////////////////////////////////////////////////////
 // The shift in SPR register of each interrupt
 ///////////////////////////////////////////////////////////////////////////////
-#define _ITC_0_SPR_SHIFT 0
-#define _ITC_1_SPR_SHIFT 2
-#define _ITC_2_SPR_SHIFT 4
-#define _ITC_3_SPR_SHIFT 6
-#define _ITC_4_SPR_SHIFT 0
-#define _ITC_5_SPR_SHIFT 2
-#define _ITC_6_SPR_SHIFT 4
-#define _ITC_7_SPR_SHIFT 6
-#define _ITC_8_SPR_SHIFT 0
-#define _ITC_9_SPR_SHIFT 2
+#define _ITC_0_SPR_SHIFT  0
+#define _ITC_1_SPR_SHIFT  2
+#define _ITC_2_SPR_SHIFT  4
+#define _ITC_3_SPR_SHIFT  6
+#define _ITC_4_SPR_SHIFT  0
+#define _ITC_5_SPR_SHIFT  2
+#define _ITC_6_SPR_SHIFT  4
+#define _ITC_7_SPR_SHIFT  6
+#define _ITC_8_SPR_SHIFT  0
+#define _ITC_9_SPR_SHIFT  2
 #define _ITC_10_SPR_SHIFT 4
 #define _ITC_11_SPR_SHIFT 6
 #define _ITC_12_SPR_SHIFT 0
@@ -149,9 +149,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 // The available external interrupt sensitivities
 ///////////////////////////////////////////////////////////////////////////////
-#define ITC_EXT_FALL_LOW 0b00 // Falling edge and low level
-#define ITC_EXT_RISE 0b01 // Rising edge only
-#define ITC_EXT_FALL 0b10 // Falling edge only
+#define ITC_EXT_FALL_LOW  0b00 // Falling edge and low level
+#define ITC_EXT_RISE      0b01 // Rising edge only
+#define ITC_EXT_FALL      0b10 // Falling edge only
 #define ITC_EXT_RISE_FALL 0b11 // Rising and falling edge
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -194,11 +194,11 @@
 //
 // Note to developers: First we set both bits to zero and then we set the bits
 // to whatever the user gave.
-#define _ITC_SET_PRIORITY(irq, level) do {\
+#define _itcSetPriority(irq, level) do {\
   _ITC_##irq##_SPR &= ~(uint8_t)(0b11 << _ITC_##irq##_SPR_SHIFT);\
   _ITC_##irq##_SPR |= (uint8_t)(_ITC_PRIORITY_##level << _ITC_##irq##_SPR_SHIFT);\
 } while(0)
-#define ITC_SET_PRIORITY(irq, level) _ITC_SET_PRIORITY(irq, level)
+#define itcSetPriority(irq, level) _itcSetPriority(irq, level)
 
 // Sets the external port interrupt sensitivity
 // Parameters:
@@ -207,11 +207,11 @@
 //
 // Note to developers: First we set both bits to zero and then we set the bits
 // to whatever the user gave.
-#define _ITC_SET_PORT_SENSITIVITY(port, sensitivity) do {\
+#define _itcSetPortSensitivity(port, sensitivity) do {\
   _ITC_PORT_##port##_CR &= ~(uint8_t)(0b11 << _ITC_PORT_##port##_CR_SHIFT);\
   _ITC_PORT_##port##_CR |= (uint8_t)(sensitivity << _ITC_PORT_##port##_CR_SHIFT);\
 } while(0)
-#define ITC_SET_PORT_SENSITIVITY(port, sensitivity) _ITC_SET_PORT_SENSITIVITY(port, sensitivity)
+#define itcSetPortSensitivity(port, sensitivity) _itcSetPortSensitivity(port, sensitivity)
 
 
 #endif /* STM8_ITC_H */

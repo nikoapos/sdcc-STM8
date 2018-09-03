@@ -69,7 +69,7 @@ int main() {
   // how to set the priority. The first parameter is the IRQ of the interrupt
   // (they are defined in the itc.h file) and the second is the priority level,
   // where 1 is the lowest and 3 the highest.
-  ITC_SET_PRIORITY(ITC_IRQ_PORTC, 1);
+  itcSetPriority(ITC_IRQ_PORTC, 1);
   
   // Optionally we can set the interrupt sensitivity. This controls when the
   // interrupt is triggered. The allowed values are:
@@ -77,7 +77,7 @@ int main() {
   // - ITC_EXT_RISE: Rising edge only
   // - ITC_EXT_FALL: Falling edge only
   // - ITC_EXT_RISE_FALL: Rising and falling edge
-  ITC_SET_PORT_SENSITIVITY(SWITCH_PORT, ITC_EXT_RISE_FALL);
+  itcSetPortSensitivity(SWITCH_PORT, ITC_EXT_RISE_FALL);
 
   // By default the interrupts are not enabled so we have to enable them
   enableInterrupts();

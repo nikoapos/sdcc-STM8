@@ -129,8 +129,8 @@ int main() {
   i2cInitialize(I2C_ADDRESS, 16);
   
   // Enable the interrupts
-  ITC_SET_PRIORITY(ITC_IRQ_I2C, 3); // I2C must have the highest priority
-  ITC_SET_PRIORITY(ITC_IRQ_TIM4_UPD_OVF, 2);
+  itcSetPriority(ITC_IRQ_I2C, 3); // I2C must have the highest priority
+  itcSetPriority(ITC_IRQ_TIM4_UPD_OVF, 2);
   enableInterrupts();
   
   // Start an infinite loop which updates the counters constantly
