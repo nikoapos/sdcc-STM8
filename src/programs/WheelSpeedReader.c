@@ -174,12 +174,12 @@ uint8_t* getMemoryPointer(uint8_t id, uint8_t* size) {
     case 0x00:
       *size = 2;
       return &(wheel->count);
-    case 0xA0:
-      *size = 2;
-      return &(wheel->period);
     case 0x10:
       *size = 4;
       return &(wheel->counts_speed);
+    case 0xA0:
+      *size = 2;
+      return &(wheel->period);
   }
   
   return 0;
@@ -222,4 +222,7 @@ void measureSpeedEvent() __interrupt(ITC_IRQ_TIM4_UPD_OVF) {
   
   // Measure the speeds of all wheels
   measureSpeed(&wheel_1);
+  measureSpeed(&wheel_2);
+  measureSpeed(&wheel_3);
+  measureSpeed(&wheel_4);
 }
