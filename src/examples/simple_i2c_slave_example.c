@@ -100,7 +100,7 @@ void i2cSlave() __interrupt(ITC_IRQ_I2C) {
   // this event occurs right after the last received byte. To instruct the I2C
   // peripheral to continue we need to clear the flag.
   if (REGISTER_I2C_SR2 & I2C_SR2_AF) {
-    REGISTER_UNSET(REGISTER_I2C_SR2, I2C_SR2_AF);
+    registerUnset(REGISTER_I2C_SR2, I2C_SR2_AF);
     return;
   }
   
@@ -109,7 +109,7 @@ void i2cSlave() __interrupt(ITC_IRQ_I2C) {
   // writing to the CR2 register.
   if (REGISTER_I2C_SR1 & I2C_SR1_STOPF) {
     // Enable he acknowledgments in the CR2 register
-    REGISTER_SET(REGISTER_I2C_CR2, I2C_CR2_ACK);
+    registerSet(REGISTER_I2C_CR2, I2C_CR2_ACK);
     return;
   }
   

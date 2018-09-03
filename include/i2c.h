@@ -96,11 +96,11 @@ void i2cInitialize(uint8_t address, uint8_t frequency) {
   uint16_t ccr;
   
   // Disable the I2C peripheral
-  REGISTER_UNSET(REGISTER_I2C_CR1, I2C_CR1_PE);
+  registerUnset(REGISTER_I2C_CR1, I2C_CR1_PE);
   
   // Set the address
-  REGISTER_UNSET(REGISTER_I2C_OARH, I2C_OARH_ADDMODE); // Use 7-bit address
-  REGISTER_SET(REGISTER_I2C_OARH, I2C_OARH_ADDCONF); // Must always be 1
+  registerUnset(REGISTER_I2C_OARH, I2C_OARH_ADDMODE); // Use 7-bit address
+  registerSet(REGISTER_I2C_OARH, I2C_OARH_ADDCONF); // Must always be 1
   REGISTER_I2C_OARL = (uint8_t)(address << 1); // Write own address
   
   // Set the input frequency
@@ -108,7 +108,7 @@ void i2cInitialize(uint8_t address, uint8_t frequency) {
   
   // Compute the CCR based on the equation Period(I2C) = 2 * CCR * t_MASTER
   // CCR = frequency * 1000000 / (2 * 100000) = frequency * 5
-  REGISTER_UNSET(REGISTER_I2C_CCRH, I2C_CCRH_FS); // Set normal mode
+  registerUnset(REGISTER_I2C_CCRH, I2C_CCRH_FS); // Set normal mode
   ccr = (uint16_t)frequency * 5;
   REGISTER_I2C_CCRL = (uint8_t)ccr;
   REGISTER_I2C_CCRH = (uint8_t)(ccr >> 8);
@@ -117,15 +117,15 @@ void i2cInitialize(uint8_t address, uint8_t frequency) {
   REGISTER_I2C_TRISER = frequency + 1;
   
   // Enable the interrupts
-  REGISTER_SET(REGISTER_I2C_ITR, I2C_ITR_ITBUFEN);
-  REGISTER_SET(REGISTER_I2C_ITR, I2C_ITR_ITEVTEN);
-  REGISTER_SET(REGISTER_I2C_ITR, I2C_ITR_ITERREN);
+  registerSet(REGISTER_I2C_ITR, I2C_ITR_ITBUFEN);
+  registerSet(REGISTER_I2C_ITR, I2C_ITR_ITEVTEN);
+  registerSet(REGISTER_I2C_ITR, I2C_ITR_ITERREN);
   
   // Enable the I2C peripheral
-  REGISTER_SET(REGISTER_I2C_CR1, I2C_CR1_PE);
+  registerSet(REGISTER_I2C_CR1, I2C_CR1_PE);
   
   // Send ACK after bytes (default I2C expectation)
-  REGISTER_SET(REGISTER_I2C_CR2, I2C_CR2_ACK);
+  registerSet(REGISTER_I2C_CR2, I2C_CR2_ACK);
 }
 
 
@@ -205,13 +205,13 @@ void _i2cMemorySlave( uint8_t* (*handleId)(uint8_t, uint8_t*), uint8_t** ptr,
   
   // Event EV3-2
   if (REGISTER_I2C_SR2 & I2C_SR2_AF) {
-    REGISTER_UNSET(REGISTER_I2C_SR2, I2C_SR2_AF);
+    registerUnset(REGISTER_I2C_SR2, I2C_SR2_AF);
     return;
   }
   
   // Event EV4
   if (REGISTER_I2C_SR1 & I2C_SR1_STOPF) {
-    REGISTER_SET(REGISTER_I2C_CR2, I2C_CR2_ACK);
+    registerSet(REGISTER_I2C_CR2, I2C_CR2_ACK);
     return;
   }
   

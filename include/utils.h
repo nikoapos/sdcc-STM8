@@ -29,18 +29,18 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Aliases for addressing the registers in the memory
 ///////////////////////////////////////////////////////////////////////////////
-#define REGISTER *(volatile unsigned char *)
+#define REGISTER    *(volatile unsigned char *)
 #define REGISTER_RO *(volatile const unsigned char *)
 
 ///////////////////////////////////////////////////////////////////////////////
 // Macros for setting and un-setting bits of a register
 ///////////////////////////////////////////////////////////////////////////////
-#define _REGISTER_SET(reg, bits) reg |= bits
-#define REGISTER_SET(reg, bits) _REGISTER_SET(reg, bits)
-#define _REGISTER_UNSET(reg, bits) reg &= !bits
-#define REGISTER_UNSET(reg, bits) _REGISTER_UNSET(reg, bits)
-#define _REGISTER_INVERT(reg, bits) reg ^= bits
-#define REGISTER_INVERT(reg, bits) _REGISTER_INVERT(reg, bits)
+#define _registerSet(reg, bits) reg |= bits
+#define registerSet(reg, bits) _registerSet(reg, bits)
+#define _registerUnset(reg, bits) reg &= !bits
+#define registerUnset(reg, bits) _registerUnset(reg, bits)
+#define _registerInvert(reg, bits) reg ^= bits
+#define registerInvert(reg, bits) _registerInvert(reg, bits)
 
 #endif /* STM8_UTILS_H */
 

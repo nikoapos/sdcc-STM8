@@ -103,63 +103,63 @@
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as input, a number in range [0,7]
-#define _gpioSetAsInput(port, pin) REGISTER_UNSET(REGISTER_P##port##_DDR, GPIO_PIN_##pin)
+#define _gpioSetAsInput(port, pin) registerUnset(REGISTER_P##port##_DDR, GPIO_PIN_##pin)
 #define gpioSetAsInput(port, pin) _gpioSetAsInput(port, pin)
 
 // Sets a given GPIO pin as an output by setting the corresponding DDR bit to 1.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as output, a number in range [0,7]
-#define _gpioSetAsOutput(port, pin) REGISTER_SET(REGISTER_P##port##_DDR, GPIO_PIN_##pin)
+#define _gpioSetAsOutput(port, pin) registerSet(REGISTER_P##port##_DDR, GPIO_PIN_##pin)
 #define gpioSetAsOutput(port, pin) _gpioSetAsOutput(port, pin)
 
 // Sets an input GPIO pin as floating by setting the corresponding CR1 bit to 0.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as floating, a number in range [0,7]
-#define _gpioSetAsFloating(port, pin) REGISTER_UNSET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
+#define _gpioSetAsFloating(port, pin) registerUnset(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
 #define gpioSetAsFloating(port, pin) _gpioSetAsFloating(port, pin)
 
 // Sets an input GPIO pin as pull-up by setting the corresponding CR1 bit to 1.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as pull-up, a number in range [0,7]
-#define _gpioSetAsPullUp(port, pin) REGISTER_SET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
+#define _gpioSetAsPullUp(port, pin) registerSet(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
 #define gpioSetAsPullUp(port, pin) _gpioSetAsPullUp(port, pin)
 
 // Sets an output GPIO pin as open drain by setting the corresponding CR1 bit to 0.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as open drain, a number in range [0,7]
-#define _gpioSetAsOpenDrain(port, pin) REGISTER_UNSET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
+#define _gpioSetAsOpenDrain(port, pin) registerUnset(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
 #define gpioSetAsOpenDrain(port, pin) _gpioSetAsOpenDrain(port, pin)
 
 // Sets an output GPIO pin as push-pull by setting the corresponding CR1 bit to 1.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as push-pull, a number in range [0,7]
-#define _gpioSetAsPushPull(port, pin) REGISTER_SET(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
+#define _gpioSetAsPushPull(port, pin) registerSet(REGISTER_P##port##_CR1, GPIO_PIN_##pin)
 #define gpioSetAsPushPull(port, pin) _gpioSetAsPushPull(port, pin)
 
 // Set an output GPIO pin as high.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as high, a number in range [0,7]
-#define _gpioWriteHigh(port, pin) REGISTER_SET(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
+#define _gpioWriteHigh(port, pin) registerSet(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
 #define gpioWriteHigh(port, pin) _gpioWriteHigh(port, pin)
 
 // Set an output GPIO pin as low.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to set as low, a number in range [0,7]
-#define _gpioWriteLow(port, pin) REGISTER_UNSET(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
+#define _gpioWriteLow(port, pin) registerUnset(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
 #define gpioWriteLow(port, pin) _gpioWriteLow(port, pin)
 
 // Invert an output GPIO pin.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to invert, a number in range [0,7]
-#define _gpioInvert(port, pin) REGISTER_INVERT(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
+#define _gpioInvert(port, pin) registerInvert(REGISTER_P##port##_ODR, GPIO_PIN_##pin)
 #define gpioInvert(port, pin) _gpioInvert(port, pin)
 
 // Read the GPIO input pin from the IDR register
@@ -202,14 +202,14 @@
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to enable the interrupts for
-#define _gpioEnableInterrupt(port, pin) REGISTER_SET(REGISTER_P##port##_CR2, GPIO_PIN_##pin)
+#define _gpioEnableInterrupt(port, pin) registerSet(REGISTER_P##port##_CR2, GPIO_PIN_##pin)
 #define gpioEnableInterrupt(port, pin) _gpioEnableInterrupt(port, pin)
 
 // Disable the interrupts for a GPIO pin.
 // Parameters:
 //    port - The port name as an uppercase letter
 //    pin - The pin of the port to disable the interrupts for
-#define _gpioDisableInterrupt(port, pin) REGISTER_UNSET(REGISTER_P##port##_CR2, GPIO_PIN_##pin)
+#define _gpioDisableInterrupt(port, pin) registerUnset(REGISTER_P##port##_CR2, GPIO_PIN_##pin)
 #define gpioDisableInterrupt(port, pin) _gpioDisableInterrupt(port, pin)
 
 #endif /* STM8_GPIO_H */

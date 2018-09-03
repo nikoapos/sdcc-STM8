@@ -133,11 +133,11 @@
 #define clkEnableCco() do {\
   gpioSetAsOutput(_CLK_CCO_PORT, _CLK_CCO_PIN);\
   gpioSetAsPushPull(_CLK_CCO_PORT, _CLK_CCO_PIN);\
-  REGISTER_SET(REGISTER_CLK_CCOR, _CLK_CCOR_CCOEN);\
+  registerSet(REGISTER_CLK_CCOR, _CLK_CCOR_CCOEN);\
 } while(0)
 
 // Disable the clock output
-#define clkDisableCco() REGISTER_UNSET(REGISTER_CLK_CCOR, _CLK_CCOR_CCOEN)
+#define clkDisableCco() registerUnset(REGISTER_CLK_CCOR, _CLK_CCOR_CCOEN)
 
 #endif /* STM8_CLK_H */
 
