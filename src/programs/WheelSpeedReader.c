@@ -117,13 +117,13 @@ int main() {
   TIM4_START();
   
   // Reset all pins to use the minimum power
-  GPIO_SET_ALL_PORTS_INPUT_PULL_UP_NO_INT();
+  gpioSetAllPortsInputPullUpNoInt();
   
   // Set the input pins as inputs
-  GPIO_SET_AS_INPUT(PORT_IN, PIN_IN_1);
-  GPIO_SET_AS_INPUT(PORT_IN, PIN_IN_2);
-  GPIO_SET_AS_INPUT(PORT_IN, PIN_IN_3);
-  GPIO_SET_AS_INPUT(PORT_IN, PIN_IN_4);
+  gpioSetAsInput(PORT_IN, PIN_IN_1);
+  gpioSetAsInput(PORT_IN, PIN_IN_2);
+  gpioSetAsInput(PORT_IN, PIN_IN_3);
+  gpioSetAsInput(PORT_IN, PIN_IN_4);
   
   // Initialize the I2C peripheral
   i2cInitialize(I2C_ADDRESS, 16);
@@ -136,10 +136,10 @@ int main() {
   // Start an infinite loop which updates the counters constantly
   while(1) {
     // Update the counters
-    updateWheelCounter(&wheel_1, GPIO_READ_INPUT(PORT_IN, PIN_IN_1));
-    updateWheelCounter(&wheel_2, GPIO_READ_INPUT(PORT_IN, PIN_IN_2));
-    updateWheelCounter(&wheel_3, GPIO_READ_INPUT(PORT_IN, PIN_IN_3));
-    updateWheelCounter(&wheel_4, GPIO_READ_INPUT(PORT_IN, PIN_IN_4));
+    updateWheelCounter(&wheel_1, gpioReadInput(PORT_IN, PIN_IN_1));
+    updateWheelCounter(&wheel_2, gpioReadInput(PORT_IN, PIN_IN_2));
+    updateWheelCounter(&wheel_3, gpioReadInput(PORT_IN, PIN_IN_3));
+    updateWheelCounter(&wheel_4, gpioReadInput(PORT_IN, PIN_IN_4));
   }
   
 }

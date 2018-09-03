@@ -54,16 +54,16 @@
 int main() {
   
   // We set the GPIO where the LED is connected as a push-pull output
-  GPIO_SET_AS_OUTPUT(LED_PORT, LED_PIN);
-  GPIO_SET_AS_PUSH_PULL(LED_PORT, LED_PIN);
+  gpioSetAsOutput(LED_PORT, LED_PIN);
+  gpioSetAsPushPull(LED_PORT, LED_PIN);
   
   // We set the GPIO where the switch is connected as a pull-up input
-  GPIO_SET_AS_INPUT(SWITCH_PORT, SWITCH_PIN);
-  GPIO_SET_AS_PULL_UP(SWITCH_PORT, SWITCH_PIN);
+  gpioSetAsInput(SWITCH_PORT, SWITCH_PIN);
+  gpioSetAsPullUp(SWITCH_PORT, SWITCH_PIN);
   
   // By default all external interrupts are masked. We have to unmask them for
   // the specific pin where the switch is connected
-  GPIO_ENABLE_INTERRUPT(SWITCH_PORT, SWITCH_PIN);
+  gpioEnableInterrupt(SWITCH_PORT, SWITCH_PIN);
   
   // The STM8 interrupts can have different priorities. This is an example of
   // how to set the priority. The first parameter is the IRQ of the interrupt
@@ -100,5 +100,5 @@ int main() {
 void invertLed() __interrupt(ITC_IRQ_PORTC) {
   
   // When the interrupt is handled we just invert the state of the LED pin
-  GPIO_INVERT(LED_PORT, LED_PIN);
+  gpioInvert(LED_PORT, LED_PIN);
 }

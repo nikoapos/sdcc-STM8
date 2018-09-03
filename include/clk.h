@@ -131,8 +131,8 @@
 #define clkSetCcoSource(source) _clkSetCcoSource(source)
 
 #define clkEnableCco() do {\
-  GPIO_SET_AS_OUTPUT(_CLK_CCO_PORT, _CLK_CCO_PIN);\
-  GPIO_SET_AS_PUSH_PULL(_CLK_CCO_PORT, _CLK_CCO_PIN);\
+  gpioSetAsOutput(_CLK_CCO_PORT, _CLK_CCO_PIN);\
+  gpioSetAsPushPull(_CLK_CCO_PORT, _CLK_CCO_PIN);\
   REGISTER_SET(REGISTER_CLK_CCOR, _CLK_CCOR_CCOEN);\
 } while(0)
 
