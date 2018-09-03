@@ -97,7 +97,7 @@ void updateWheelCounter(Wheel* wheel, bool new_state) {
 int main() {
   
   // Set the f_master to 16 MHz
-  CLK_SET_HSI_DIVIDER(1);
+  clkSetHsiDivider(1);
   
   // Set the TIM4 timer to create an interrupt every 1ms
   // We run at 16 Mz and we set the prescaler to 128, so the frequency of the

@@ -40,7 +40,7 @@
 int main() {
   
   // First we set the f_master to 16 MHz
-  CLK_SET_HSI_DIVIDER(1);
+  clkSetHsiDivider(1);
   
   // We initialize the I2C. The first parameter is the 7-bit address we want to
   // use for the slave. The second is the value of the f_master (in MHz).

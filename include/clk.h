@@ -32,70 +32,70 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Clock related registers
 ///////////////////////////////////////////////////////////////////////////////
-#define REGISTER_CLK_ICKR REGISTER 0x50C0 // Internal clock control register
-#define REGISTER_CLK_ECKR REGISTER 0x50C1 // External clock control register
-#define REGISTER_CLK_CMSR REGISTER 0x50C3 // Clock master status register
-#define REGISTER_CLK_SWR REGISTER 0x50C4 // Clock master switch register
-#define REGISTER_CLK_SWCR REGISTER 0x50C5 // Clock switch control register
-#define REGISTER_CLK_CKDIVR REGISTER 0x50C6 // Clock divider register
-#define REGISTER_CLK_PCKENR1 REGISTER 0x50C7 // Peripheral clock gaing register 1
-#define REGISTER_CLK_CSSR REGISTER 0x50C8 // Clock security system register
-#define REGISTER_CLK_CCOR REGISTER 0x50C9 // Configurable clock control register
-#define REGISTER_CLK_PCKENR2 REGISTER 0x50CA // Periphera clock gating register 2
+#define REGISTER_CLK_ICKR REGISTER     0x50C0 // Internal clock control register
+#define REGISTER_CLK_ECKR REGISTER     0x50C1 // External clock control register
+#define REGISTER_CLK_CMSR REGISTER     0x50C3 // Clock master status register
+#define REGISTER_CLK_SWR REGISTER      0x50C4 // Clock master switch register
+#define REGISTER_CLK_SWCR REGISTER     0x50C5 // Clock switch control register
+#define REGISTER_CLK_CKDIVR REGISTER   0x50C6 // Clock divider register
+#define REGISTER_CLK_PCKENR1 REGISTER  0x50C7 // Peripheral clock gaing register 1
+#define REGISTER_CLK_CSSR REGISTER     0x50C8 // Clock security system register
+#define REGISTER_CLK_CCOR REGISTER     0x50C9 // Configurable clock control register
+#define REGISTER_CLK_PCKENR2 REGISTER  0x50CA // Periphera clock gating register 2
 #define REGISTER_CLK_HSITRIMR REGISTER 0x50CC // HSI clock calibration trimming register
-#define REGISTER_CLK_SWIMCCR REGISTER 0x50CD // SWIM clock control register
+#define REGISTER_CLK_SWIMCCR REGISTER  0x50CD // SWIM clock control register
 
 ///////////////////////////////////////////////////////////////////////////////
 // Helper values for setting the HSI divider
 ///////////////////////////////////////////////////////////////////////////////
 #define _CLK_HSI_DIV_MASK (uint8_t)0b00011000
-#define _CLK_HSI_DIV_1 (uint8_t)0b00000000
-#define _CLK_HSI_DIV_2 (uint8_t)0b00001000
-#define _CLK_HSI_DIV_4 (uint8_t)0b00010000
-#define _CLK_HSI_DIV_8 (uint8_t)0b00011000
+#define _CLK_HSI_DIV_1    (uint8_t)0b00000000
+#define _CLK_HSI_DIV_2    (uint8_t)0b00001000
+#define _CLK_HSI_DIV_4    (uint8_t)0b00010000
+#define _CLK_HSI_DIV_8    (uint8_t)0b00011000
 
 ///////////////////////////////////////////////////////////////////////////////
 // Helper values for setting the CPU divider
 ///////////////////////////////////////////////////////////////////////////////
 #define _CLK_CPU_DIV_MASK (uint8_t)0b00000111
-#define _CLK_CPU_DIV_1 (uint8_t)0b00000000
-#define _CLK_CPU_DIV_2 (uint8_t)0b00000001
-#define _CLK_CPU_DIV_4 (uint8_t)0b00000010
-#define _CLK_CPU_DIV_8 (uint8_t)0b00000011
-#define _CLK_CPU_DIV_16 (uint8_t)0b00000100
-#define _CLK_CPU_DIV_32 (uint8_t)0b00000101
-#define _CLK_CPU_DIV_64 (uint8_t)0b00000110
-#define _CLK_CPU_DIV_128 (uint8_t)0b00000111
+#define _CLK_CPU_DIV_1    (uint8_t)0b00000000
+#define _CLK_CPU_DIV_2    (uint8_t)0b00000001
+#define _CLK_CPU_DIV_4    (uint8_t)0b00000010
+#define _CLK_CPU_DIV_8    (uint8_t)0b00000011
+#define _CLK_CPU_DIV_16   (uint8_t)0b00000100
+#define _CLK_CPU_DIV_32   (uint8_t)0b00000101
+#define _CLK_CPU_DIV_64   (uint8_t)0b00000110
+#define _CLK_CPU_DIV_128  (uint8_t)0b00000111
 
 ///////////////////////////////////////////////////////////////////////////////
 // Helper values for setting the CCO clock selection
 ///////////////////////////////////////////////////////////////////////////////
-#define _CLK_CCO_SEL_MASK (uint8_t)0b00011110
+#define _CLK_CCO_SEL_MASK   (uint8_t)0b00011110
 #define _CLK_CCO_SEL_HSIDIV (uint8_t)0b00000000
-#define _CLK_CCO_SEL_LSI (uint8_t)0b00000010
-#define _CLK_CCO_SEL_HSE (uint8_t)0b00000100
-#define _CLK_CCO_SEL_CPU (uint8_t)0b00001000
-#define _CLK_CCO_SEL_CPU_2 (uint8_t)0b00001010
-#define _CLK_CCO_SEL_CPU_4 (uint8_t)0b00001100
-#define _CLK_CCO_SEL_CPU_8 (uint8_t)0b00001110
+#define _CLK_CCO_SEL_LSI    (uint8_t)0b00000010
+#define _CLK_CCO_SEL_HSE    (uint8_t)0b00000100
+#define _CLK_CCO_SEL_CPU    (uint8_t)0b00001000
+#define _CLK_CCO_SEL_CPU_2  (uint8_t)0b00001010
+#define _CLK_CCO_SEL_CPU_4  (uint8_t)0b00001100
+#define _CLK_CCO_SEL_CPU_8  (uint8_t)0b00001110
 #define _CLK_CCO_SEL_CPU_16 (uint8_t)0b00010000
 #define _CLK_CCO_SEL_CPU_32 (uint8_t)0b00010010
 #define _CLK_CCO_SEL_CPU_64 (uint8_t)0b00010100
-#define _CLK_CCO_SEL_HSI (uint8_t)0b00010110
+#define _CLK_CCO_SEL_HSI    (uint8_t)0b00010110
 #define _CLK_CCO_SEL_MASTER (uint8_t)0b00011000
 
 ///////////////////////////////////////////////////////////////////////////////
 // The GPIO pin of the CCO
 ///////////////////////////////////////////////////////////////////////////////
 #define _CLK_CCO_PORT C
-#define _CLK_CCO_PIN 4
+#define _CLK_CCO_PIN  4
 
 ///////////////////////////////////////////////////////////////////////////////
 // Useful register bits
 ///////////////////////////////////////////////////////////////////////////////
 #define _CLK_CCOR_CCOBSY (uint8_t)0b01000000
 #define _CLK_CCOR_CCORDY (uint8_t)0b00100000
-#define _CLK_CCOR_CCOEN (uint8_t)0b00000001
+#define _CLK_CCOR_CCOEN  (uint8_t)0b00000001
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -105,39 +105,39 @@
 // Sets the internal high speed clock divider
 // Parameters:
 // - divider: One of 1, 2, 4 or 8
-#define _CLK_SET_HSI_DIVIDER(divider) do {\
+#define _clkSetHsiDivider(divider) do {\
   REGISTER_CLK_CKDIVR &= ~_CLK_HSI_DIV_MASK;\
   REGISTER_CLK_CKDIVR |= _CLK_HSI_DIV_##divider;\
 } while(0)
-#define CLK_SET_HSI_DIVIDER(divider) _CLK_SET_HSI_DIVIDER(divider)
+#define clkSetHsiDivider(divider) _clkSetHsiDivider(divider)
 
 // Sets the CPU clock divider
 // Parameters:
 // - divider: One of 1, 2, 4, 8, 16, 32, 64 or 128
-#define _CLK_SET_CPU_DIVIDER(divider) do {\
+#define _clkSetCpuDivider(divider) do {\
   REGISTER_CLK_CKDIVR &= ~_CLK_CPU_DIV_MASK;\
   REGISTER_CLK_CKDIVR |= _CLK_CPU_DIV_##divider;\
 } while(0)
-#define CLK_SET_CPU_DIVIDER(divider) _CLK_SET_CPU_DIVIDER(divider)
+#define clkSetCpuDivider(divider) _clkSetCpuDivider(divider)
 
 // Select the source for the output clock
 // Parameters:
 // - source: One of HSIDIV, SI, HSE, CPU, CPU_2, CPU_4, CPU_8, CPU_16, CPU_32
 //           CPU_64, HSI, MASTER
-#define _CLK_SET_CCO_SOURCE(source) do {\
+#define _clkSetCcoSource(source) do {\
   REGISTER_CLK_CCOR &= ~_CLK_CCO_SEL_MASK;\
   REGISTER_CLK_CCOR |= _CLK_CCO_SEL_##source;\
 } while(0)
-#define CLK_SET_CCO_SOURCE(source) _CLK_SET_CCO_SOURCE(source)
+#define clkSetCcoSource(source) _clkSetCcoSource(source)
 
-#define CLK_ENABLE_CCO() do {\
+#define clkEnableCco() do {\
   GPIO_SET_AS_OUTPUT(_CLK_CCO_PORT, _CLK_CCO_PIN);\
   GPIO_SET_AS_PUSH_PULL(_CLK_CCO_PORT, _CLK_CCO_PIN);\
   REGISTER_SET(REGISTER_CLK_CCOR, _CLK_CCOR_CCOEN);\
 } while(0)
 
 // Disable the clock output
-#define CLK_DISABLE_CCO() REGISTER_UNSET(REGISTER_CLK_CCOR, _CLK_CCOR_CCOEN)
+#define clkDisableCco() REGISTER_UNSET(REGISTER_CLK_CCOR, _CLK_CCOR_CCOEN)
 
 #endif /* STM8_CLK_H */
 
